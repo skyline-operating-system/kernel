@@ -10,6 +10,6 @@ docker run \
     -e SKYLINE_SUB_ARCH=$SUBARCH \
     -e SKYLINE_BOOTLOADER=$BOOTLOADER \
     -e SKYLINE_COMMIT_HASH=$(git rev-parse HEAD) \
-    -e SKYLINE_SOURCEDIR=/code/kernel \
+    -e SKYLINE_SOURCE_DIR=/code/kernel \
     --mount type=bind,source="$(realpath $PWD)",target=/code/kernel \
     ghcr.io/skyline-operating-system/kernel-buildbot:latest
