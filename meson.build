@@ -34,6 +34,10 @@ full_architecture_name = architecture
 # Get target bootloader
 bootloader = get_option('bootloader')
 
+# Set shared variables
+kernel_cpp_sources = []
+kernel_asm_sources = []
+
 # Check if arch is supported and load the subdir
 if architecture not in supported_architectures
     error(f'Architecture not supported: @architecture@')
@@ -52,14 +56,18 @@ if sub_architecture != ''
     subdir(f'arch/@full_architecture_path@')
 endif
 
+# Set after bootloader so it can influence extname
+kernel_basename = f'skyline-kernel-@full_architecture_name@-@bootloader@-@kernel_version@'
+
+# Crossplatform sources
+kernel_cpp_sources = files(
+    'main/kmain.cc'
+)
+
+kernel_cpp_includes = include_directories('.')
+
 # Same thing with bootloader subdir
 if bootloader not in supported_bootloaders
     error(f'Bootloader \'@bootloader@\' not supported on architecture \'@full_architecture_name@\'')
 endif
 subdir(f'boot/@full_architecture_path@/@bootloader@')
-
-# Set after bootloader so it can influence extname
-kernel_basename = f'skyline-kernel-@full_architecture_name@-@bootloader@-@kernel_version@'
-kernel_fullname = f'@kernel_basename@@kernel_extname@'
-
-executable(kernel_fullname)

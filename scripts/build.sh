@@ -1,8 +1,8 @@
 #!/bin/sh
 
-ARCH="${ARCH:-default x86_64}"
+ARCH="${ARCH:-x86_64}"
 SUBARCH="${SUBARCH}"
-BOOTLOADER="${BOOTLOADER:-default uefi}"
+BOOTLOADER="${BOOTLOADER:-uefi}"
 
 docker run \
     -e SKYLINE_TAG=master \
