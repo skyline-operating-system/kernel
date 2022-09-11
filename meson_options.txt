@@ -1,0 +1,6 @@
+option('architecture', type: 'string', value: 'x86_64')
+option('sub_architecture', type: 'string', value: '')
+option('bootloader', type: 'string', value: 'legacy')
+
+option('git_commit_hash', type: 'string', value: 'forgot-to-set-commit-hash')
+option('git_tag', type: 'string', value: '')
